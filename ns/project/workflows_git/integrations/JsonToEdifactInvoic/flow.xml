@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FLOW VERSION="3.2" CLEANUP="true">
+<COMMENT></COMMENT>
+<INVOKE NAME="parseJson" SERVICE="pub.json:jsonToDocument">
+<COMMENT></COMMENT>
+<MAP MODE="INPUT">
+<COMMENT></COMMENT>
+<MAPTARGET>
+<Values version="2.0">
+  <value name="field_name">jsonToDocumentInput</value>
+  <array name="rec_fields" type="record" depth="1">
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">field</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_comment"></value>
+  <record name="node_hints" javaclass="com.wm.util.Values">
+    <value name="field_largerEditor">false</value>
+    <value name="field_password">false</value>
+    <value name="field_usereditable">false</value>
+  </record>
+  <value name="is_public">false</value>
+  <value name="field_name">jsonData</value>
+  <value name="field_type">object</value>
+  <value name="field_dim">0</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+</record>
+  </array>
+</Values>
+</MAPTARGET>
+<MAPSOURCE>
+<Values version="2.0">
+  <array name="rec_fields" type="record" depth="1">
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">field</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_comment"></value>
+  <record name="node_hints" javaclass="com.wm.util.Values">
+    <value name="field_largerEditor">false</value>
+    <value name="field_password">false</value>
+    <value name="field_usereditable">false</value>
+  </record>
+  <value name="is_public">false</value>
+  <value name="field_name">jsonInput</value>
+  <value name="field_type">string</value>
+  <value name="field_dim">0</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+</record>
+  </array>
+</Values>
+</MAPSOURCE>
+<MAPCOPY FROM="/jsonInput;1;0" TO="/jsonData;1;0"/>
+</MAP>
+<MAP MODE="OUTPUT">
+<COMMENT></COMMENT>
+</MAP>
+</INVOKE>
+<MAP NAME="buildHeader" TIMEOUT="" MODE="STANDALONE">
+<MAPTARGET>
+<Values version="2.0">
+  <array name="rec_fields" type="record" depth="1">
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">field</value>
+  <value name="node_subtype">unknown</value>
+  <value name="is_public">false</value>
+  <value name="field_name">edidata</value>
+  <value name="field_type">string</value>
+  <value name="field_dim">0</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+</record>
+  </array>
+</Values>
+</MAPTARGET>
+<MAPSOURCE>
+<Values version="2.0">
+  <array name="rec_fields" type="record" depth="1">
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">record</value>
+  <value name="node_subtype">unknown</value>
+  <value name="is_public">false</value>
+  <value name="field_name">document</value>
+  <value name="field_type">record</value>
+  <value name="field_dim">0</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+  <array name="rec_fields" type="record" depth="1">
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">record</value>
+  <value name="node_subtype">unknown</value>
+  <value name="is_public">false</value>
+  <value name="field_name">lines</value>
+  <value name="field_type">record</value>
+  <value name="field_dim">1</value>
+  <value name="is_soap_array_encoding_used">false</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+  <array name="rec_fields" type="record" depth="1">
+  </array>
+</record>
+  </array>
+</record>
+  </array>
+</Values>
+</MAPSOURCE>
+<MAPSET NAME="Set /edidata;1;0" OVERWRITE="true" VARIABLES="true" GLOBALVARIABLES="false" FIELD="/edidata;1;0">
+  <DATA ENCODING="XMLValues" I18N="true">
+<Values version="2.0">
+  <value name="xml">UNH+1+INVOIC:D:96A:UN'
+BGM+380+%document/invoiceNumber%+9'
+DTM+137:%document/invoiceDate%:102'
+NAD+SU+%document/supplier/gln%::9++%document/supplier/name%'
+NAD+BY+%document/buyer/gln%::9++%document/buyer/name%'
+CUX+2:%document/currency%:4'
+</value>
+</Values>
+  </DATA>
+</MAPSET>
+</MAP>
+<INVOKE NAME="countLines" SERVICE="pub.list:sizeOfList">
+<COMMENT></COMMENT>
+<MAP MODE="INPUT">
+<COMMENT></COMMENT>
+<MAPTARGET>
+<Values version="2.0">
+  <array name="rec_fields" type="record" depth="1">
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">record</value>
+  <value name="node_subtype">unknown</value>
+  <value name="is_public">false</value>
+  <value name="field_name">fromList</value>
+  <value name="field_type">record</value>
+  <value name="field_dim">1</value>
+  <value name="is_soap_array_encoding_used">false</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+  <array name="rec_fields" type="record" depth="1">
+  </array>
+</record>
+  </array>
+</Values>
+</MAPTARGET>
+<MAPSOURCE>
+<Values version="2.0">
+  <array name="rec_fields" type="record" depth="1">
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">record</value>
+  <value name="node_subtype">unknown</value>
+  <value name="is_public">false</value>
+  <value name="field_name">document</value>
+  <value name="field_type">record</value>
+  <value name="field_dim">0</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+  <array name="rec_fields" type="record" depth="1">
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">record</value>
+  <value name="node_subtype">unknown</value>
+  <value name="is_public">false</value>
+  <value name="field_name">lines</value>
+  <value name="field_type">record</value>
+  <value name="field_dim">1</value>
+  <value name="is_soap_array_encoding_used">false</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+  <array name="rec_fields" type="record" depth="1">
+  </array>
+</record>
+  </array>
+</record>
+  </array>
+</Values>
+</MAPSOURCE>
+<MAPCOPY FROM="/document/lines;2;0" TO="/fromList;2;0"/>
+</MAP>
+<MAP MODE="OUTPUT">
+<COMMENT></COMMENT>
+<MAPCOPY FROM="/size;1;0" TO="/lineCount;1;0"/>
+</MAP>
+</INVOKE>
+<LOOP NAME="perLine" IN-ARRAY="/document/lines" OUT-ARRAY="/document/lines" MAX-THREADS="1" PARALLEL-ERROR-HANDLING="reportError">
+<COMMENT></COMMENT>
+<MAP NAME="appendLine" TIMEOUT="" MODE="STANDALONE">
+<MAPTARGET>
+<Values version="2.0">
+  <array name="rec_fields" type="record" depth="1">
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">field</value>
+  <value name="node_subtype">unknown</value>
+  <value name="is_public">false</value>
+  <value name="field_name">edidata</value>
+  <value name="field_type">string</value>
+  <value name="field_dim">0</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+</record>
+  </array>
+</Values>
+</MAPTARGET>
+<MAPSOURCE>
+<Values version="2.0">
+  <array name="rec_fields" type="record" depth="1">
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">record</value>
+  <value name="node_subtype">unknown</value>
+  <value name="is_public">false</value>
+  <value name="field_name">document</value>
+  <value name="field_type">record</value>
+  <value name="field_dim">0</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+  <array name="rec_fields" type="record" depth="1">
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">record</value>
+  <value name="node_subtype">unknown</value>
+  <value name="is_public">false</value>
+  <value name="field_name">lines</value>
+  <value name="field_type">record</value>
+  <value name="field_dim">1</value>
+  <value name="is_soap_array_encoding_used">false</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+  <array name="rec_fields" type="record" depth="1">
+  </array>
+</record>
+  </array>
+</record>
+  </array>
+</Values>
+</MAPSOURCE>
+<MAPSET NAME="Set /edidata;1;0" OVERWRITE="true" VARIABLES="true" GLOBALVARIABLES="false" FIELD="/edidata;1;0">
+  <DATA ENCODING="XMLValues" I18N="true">
+<Values version="2.0">
+  <value name="xml">%edidata%LIN+%document/lines/lineNumber%++%document/lines/itemCode%:SA'
+IMD+F++:::%document/lines/description%'
+QTY+47:%document/lines/quantity%'
+MOA+203:%document/lines/lineAmount%'
+PRI+AAA:%document/lines/unitPrice%'
+</value>
+</Values>
+  </DATA>
+</MAPSET>
+</MAP>
+</LOOP>
+<INVOKE NAME="linesTimesFive" SERVICE="pub.math:multiplyInts">
+<COMMENT></COMMENT>
+<MAP MODE="INPUT">
+<COMMENT></COMMENT>
+<MAPTARGET>
+<Values version="2.0">
+  <array name="rec_fields" type="record" depth="1">
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">field</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_comment"></value>
+  <record name="node_hints" javaclass="com.wm.util.Values">
+    <value name="field_largerEditor">false</value>
+    <value name="field_password">false</value>
+    <value name="field_usereditable">false</value>
+  </record>
+  <value name="is_public">false</value>
+  <value name="field_name">num1</value>
+  <value name="field_type">string</value>
+  <value name="field_dim">0</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+</record>
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">field</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_comment"></value>
+  <record name="node_hints" javaclass="com.wm.util.Values">
+    <value name="field_largerEditor">false</value>
+    <value name="field_password">false</value>
+    <value name="field_usereditable">false</value>
+  </record>
+  <value name="is_public">false</value>
+  <value name="field_name">num2</value>
+  <value name="field_type">string</value>
+  <value name="field_dim">0</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+</record>
+  </array>
+</Values>
+</MAPTARGET>
+<MAPSOURCE>
+<Values version="2.0">
+  <array name="rec_fields" type="record" depth="1">
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">field</value>
+  <value name="node_subtype">unknown</value>
+  <value name="is_public">false</value>
+  <value name="field_name">lineCount</value>
+  <value name="field_type">string</value>
+  <value name="field_dim">0</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+</record>
+  </array>
+</Values>
+</MAPSOURCE>
+<MAPCOPY FROM="/lineCount;1;0" TO="/num1;1;0"/>
+<MAPSET NAME="Set /num2;1;0" OVERWRITE="true" VARIABLES="false" GLOBALVARIABLES="false" FIELD="/num2;1;0">
+  <DATA ENCODING="XMLValues" I18N="true">
+<Values version="2.0">
+  <value name="xml">5</value>
+</Values>
+  </DATA>
+</MAPSET>
+</MAP>
+<MAP MODE="OUTPUT">
+<COMMENT></COMMENT>
+<MAPCOPY FROM="/value;1;0" TO="/lineSeg;1;0"/>
+</MAP>
+</INVOKE>
+<INVOKE NAME="addBaseSegs" SERVICE="pub.math:addInts">
+<COMMENT></COMMENT>
+<MAP MODE="INPUT">
+<COMMENT></COMMENT>
+<MAPTARGET>
+<Values version="2.0">
+  <array name="rec_fields" type="record" depth="1">
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">field</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_comment"></value>
+  <record name="node_hints" javaclass="com.wm.util.Values">
+    <value name="field_largerEditor">false</value>
+    <value name="field_password">false</value>
+    <value name="field_usereditable">false</value>
+  </record>
+  <value name="is_public">false</value>
+  <value name="field_name">num1</value>
+  <value name="field_type">string</value>
+  <value name="field_dim">0</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+</record>
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">field</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_comment"></value>
+  <record name="node_hints" javaclass="com.wm.util.Values">
+    <value name="field_largerEditor">false</value>
+    <value name="field_password">false</value>
+    <value name="field_usereditable">false</value>
+  </record>
+  <value name="is_public">false</value>
+  <value name="field_name">num2</value>
+  <value name="field_type">string</value>
+  <value name="field_dim">0</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+</record>
+  </array>
+</Values>
+</MAPTARGET>
+<MAPSOURCE>
+<Values version="2.0">
+  <array name="rec_fields" type="record" depth="1">
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">field</value>
+  <value name="node_subtype">unknown</value>
+  <value name="is_public">false</value>
+  <value name="field_name">lineSeg</value>
+  <value name="field_type">string</value>
+  <value name="field_dim">0</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+</record>
+  </array>
+</Values>
+</MAPSOURCE>
+<MAPCOPY FROM="/lineSeg;1;0" TO="/num1;1;0"/>
+<MAPSET NAME="Set /num2;1;0" OVERWRITE="true" VARIABLES="false" GLOBALVARIABLES="false" FIELD="/num2;1;0">
+  <DATA ENCODING="XMLValues" I18N="true">
+<Values version="2.0">
+  <value name="xml">10</value>
+</Values>
+  </DATA>
+</MAPSET>
+</MAP>
+<MAP MODE="OUTPUT">
+<COMMENT></COMMENT>
+<MAPCOPY FROM="/value;1;0" TO="/segCount;1;0"/>
+</MAP>
+</INVOKE>
+<MAP NAME="buildTrailer" TIMEOUT="" MODE="STANDALONE">
+<MAPTARGET>
+<Values version="2.0">
+  <array name="rec_fields" type="record" depth="1">
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">field</value>
+  <value name="node_subtype">unknown</value>
+  <value name="is_public">false</value>
+  <value name="field_name">edidata</value>
+  <value name="field_type">string</value>
+  <value name="field_dim">0</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+</record>
+  </array>
+</Values>
+</MAPTARGET>
+<MAPSOURCE>
+<Values version="2.0">
+  <array name="rec_fields" type="record" depth="1">
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">record</value>
+  <value name="node_subtype">unknown</value>
+  <value name="is_public">false</value>
+  <value name="field_name">document</value>
+  <value name="field_type">record</value>
+  <value name="field_dim">0</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+  <array name="rec_fields" type="record" depth="1">
+<record javaclass="com.wm.util.Values">
+  <value name="node_type">record</value>
+  <value name="node_subtype">unknown</value>
+  <value name="is_public">false</value>
+  <value name="field_name">lines</value>
+  <value name="field_type">record</value>
+  <value name="field_dim">1</value>
+  <value name="is_soap_array_encoding_used">false</value>
+  <value name="nillable">true</value>
+  <value name="form_qualified">false</value>
+  <value name="is_global">false</value>
+  <array name="rec_fields" type="record" depth="1">
+  </array>
+</record>
+  </array>
+</record>
+  </array>
+</Values>
+</MAPSOURCE>
+<MAPSET NAME="Set /edidata;1;0" OVERWRITE="true" VARIABLES="true" GLOBALVARIABLES="false" FIELD="/edidata;1;0">
+  <DATA ENCODING="XMLValues" I18N="true">
+<Values version="2.0">
+  <value name="xml">%edidata%UNS+S'
+MOA+9:%document/totalAmount%'
+CNT+2:%lineCount%'
+UNT+%segCount%+1'
+</value>
+</Values>
+  </DATA>
+</MAPSET>
+</MAP>
+</FLOW>
